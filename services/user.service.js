@@ -41,5 +41,40 @@ exports.createUser = (req, res, next) => {
             }
         }
     })
+}
 
+exports.updateUser = (req, res, next) => {
+    User.findOne({
+        _id: req.params.id
+    }, (e, user) => {
+        if (e) {
+            next({
+                code: 500,
+                data: e
+            })
+        } else {
+            if (user) {
+                User.findOneAndUpdate({
+                        _id: req.params.id
+                    },
+                    req.body, (e) => {
+                        if (e) {
+                            next({
+                                code: 500,
+                                data: e
+                            })
+                        } else {
+                            res.json({
+                                message: "user profile has been updated."
+                            })
+                        }
+                    })
+            } else {
+                next({
+                    code: 404,
+                    data: new Error('user is not found.')
+                })
+            }
+        }
+    })
 }
