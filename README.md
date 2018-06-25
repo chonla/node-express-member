@@ -23,3 +23,15 @@
 	"password": "password"
 }
 ```
+
+## Update user profile
+
+**Method:** POST
+**Endpoint:** /users/:id
+**Remark:** This API requires access token returned from login API as Auth Bearer
+
+```
+{
+	"display": "John Farmer"
+}
+```
