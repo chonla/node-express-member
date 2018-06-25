@@ -6,6 +6,8 @@ const User = require('../models/user.model')
 exports.createUser = (req, res, next) => {
     const u = {
         login: req.body.login,
+        display: req.body.display,
+        email: req.body.email,
         password: sha256(req.body.password)
     }
     User.findOne({
