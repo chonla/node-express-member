@@ -1,12 +1,14 @@
 'use strict'
 
 const express = require('express')
+const cors = require('cors')
 const AuthService = require('./services/auth.service')
 const UserService = require('./services/user.service')
 
 module.exports = (app) => {
     const router = express.Router()
 
+    router.options('*', cors())
     router.post('/auth/login', AuthService.login)
     router.post('/users', UserService.createUser)
 
