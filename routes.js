@@ -14,6 +14,7 @@ module.exports = (app) => {
     router.post('/users', cors(), UserService.createUser)
     router.patch('/users/:id', [cors(), security.secure], UserService.updateUser)
     router.patch('/me', [cors(), security.secure], UserService.updateMe)
+    router.get('/me', [cors(), security.secure], UserService.getMe)
 
     app.use(router)
     app.use((err, req, res, next) => {

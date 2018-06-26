@@ -43,6 +43,30 @@ exports.createUser = (req, res, next) => {
     })
 }
 
+exports.getMe = (req, res, next) => {
+    User.findOne({
+        _id: req.user.data.id
+    }, (e, user) => {
+        if (e) {
+            next({
+                code: 500,
+                data: e
+            })
+        } else {
+            if (user) {
+                res.json({
+                    displayName: user.displayName
+                })
+            } else {
+                next({
+                    code: 404,
+                    data: new Error('user is not found.')
+                })
+            }
+        }
+    })
+}
+
 exports.updateMe = (req, res, next) => {
     User.findOne({
         _id: req.user.data.id
