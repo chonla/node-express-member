@@ -10,9 +10,9 @@ module.exports = (app) => {
     const router = express.Router()
 
     router.options('*', cors())
-    router.post('/auth/login', AuthService.login)
-    router.post('/users', UserService.createUser)
-    router.patch('/users/:id', security.secure, UserService.updateUser)
+    router.post('/auth/login', cors(), AuthService.login)
+    router.post('/users', cors(), UserService.createUser)
+    router.patch('/users/:id', [cors(), security.secure], UserService.updateUser)
 
     app.use(router)
     app.use((err, req, res, next) => {
