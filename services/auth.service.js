@@ -4,10 +4,12 @@ const jwt = require('jsonwebtoken')
 const sha256 = require('sha256')
 const User = require('../models/user.model')
 
-const createToken = (login) => {
+const createToken = (login, id) => {
+    console.log(login, id)
     const token = jwt.sign({
         data: {
-            name: login
+            name: login,
+            id: id
         }
     }, 'secret', {
         expiresIn: 3600,
@@ -27,7 +29,7 @@ exports.login = (req, res, next) => {
             })
         } else {
             if (user && (sha256(req.body.password) === user.password)) {
-                const token = createToken(req.body.login)
+                const token = createToken(req.body.login, user._id)
                 res.json({
                     token: token
                 })
