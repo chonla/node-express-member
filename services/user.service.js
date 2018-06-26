@@ -45,7 +45,7 @@ exports.createUser = (req, res, next) => {
 
 exports.updateMe = (req, res, next) => {
     User.findOne({
-        _id: req.user.id
+        _id: req.user.data.id
     }, (e, user) => {
         if (e) {
             next({
@@ -55,7 +55,7 @@ exports.updateMe = (req, res, next) => {
         } else {
             if (user) {
                 User.findOneAndUpdate({
-                        _id: req.user.id
+                        _id: req.user.data.id
                     },
                     req.body, (e) => {
                         if (e) {

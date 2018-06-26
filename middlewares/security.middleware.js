@@ -12,6 +12,7 @@ exports.secure = (req, res, next) => {
                     next(err)
                 } else {
                     req.user = decodedToken
+                    console.log(decodedToken)
                     next()
                 }
             })
