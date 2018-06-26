@@ -47,6 +47,7 @@ exports.getMe = (req, res, next) => {
     User.findOne({
         _id: req.user.data.id
     }, (e, user) => {
+        console.log(user)
         if (e) {
             next({
                 code: 500,
@@ -55,7 +56,7 @@ exports.getMe = (req, res, next) => {
         } else {
             if (user) {
                 res.json({
-                    displayName: user.displayName
+                    display: user.display
                 })
             } else {
                 next({
