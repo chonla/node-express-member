@@ -4,6 +4,7 @@ const express = require('express')
 const cors = require('cors')
 const AuthService = require('./services/auth.service')
 const UserService = require('./services/user.service')
+const MemberService = require('./services/member.service')
 const security = require('./middlewares/security.middleware')
 
 module.exports = (app) => {
@@ -15,6 +16,11 @@ module.exports = (app) => {
     router.patch('/users/:id', [cors(), security.secure], UserService.updateUser)
     router.patch('/me', [cors(), security.secure], UserService.updateMe)
     router.get('/me', [cors(), security.secure], UserService.getMe)
+
+    router.get('/bnk/members', cors(), security.secure, MemberService.getMember)
+    router.post('/bnk/members', cors(), security.secure, MemberService.createMember)
+    router.patch('/bnk/members/:id', cors(), security.secure, MemberService.updateMember)
+    router.delete('/bnk/members/:id', cors(), security.secure, MemberService.deleteMember)
 
     app.use(router)
     app.use((err, req, res, next) => {
