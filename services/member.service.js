@@ -1,7 +1,7 @@
 const Member = require('../models/member.model');
 
 
-exports.getMember = async (req, res, next) => {
+exports.getMembers = async (req, res, next) => {
     try {
         let members = await Member.find().sort({
             "_id": 1
@@ -17,12 +17,43 @@ exports.getMember = async (req, res, next) => {
     } catch (err) {
         next({
             code: 500,
-            data: e
+            data: err
         })
         return
     }
     return
 };
+
+exports.getMember = async (req, res, next) => {
+    try {
+        let member = await Member.findOne({
+            _id: req.params.id
+        });
+        if (member === null) {
+            next({
+                code: 404,
+                data: new Error('member is not found.')
+            })
+        } else {
+            res.json(member)
+        }
+    } catch (err) {
+        if (err.name === "CastError") {
+            next({
+                code: 404,
+                data: new Error('member is not found.')
+            })
+        } else {
+            next({
+                code: 500,
+                data: err
+            })
+        }
+        return
+    }
+    return
+};
+
 exports.createMember = async (req, res, next) => {
     const model = {
         name: req.body.name,
@@ -46,7 +77,7 @@ exports.createMember = async (req, res, next) => {
     } catch (err) {
         next({
             code: 500,
-            data: e
+            data: err
         })
         return
     }
@@ -78,7 +109,7 @@ exports.updateMember = async (req, res, next) => {
     } catch (err) {
         next({
             code: 500,
-            data: e
+            data: err
         })
     }
     return
@@ -95,7 +126,7 @@ exports.deleteMember = async (req, res, next) => {
     } catch (err) {
         next({
             code: 500,
-            data: e
+            data: err
         })
     }
     return
