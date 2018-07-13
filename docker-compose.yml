@@ -1,11 +1,15 @@
 version: '3.6'
 
 services:
-  mongo:
+  mongodb:
     image: mongo
     restart: always
     ports:
       - 27017:27017
+  mongo-seed:
+    build: ./docker/mongo-seed
+    links:
+      - mongodb
   # node:
   #   build: ./docker/node
   #   ports:

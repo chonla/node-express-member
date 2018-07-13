@@ -1,0 +1,13 @@
+[{
+        "login": "john",
+        "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+        "display": "john farmer",
+        "email": "john@farmer.com"
+    },
+    {
+        "login": "admin",
+        "password": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+        "display": "administrator",
+        "email": "admin@farmer.com"
+    }
+]
