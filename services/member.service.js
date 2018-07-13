@@ -3,7 +3,9 @@ const Member = require('../models/member.model');
 
 exports.getMember = async (req, res, next) => {
     try {
-        let members = await Member.find();
+        let members = await Member.find().sort({
+            "_id": 1
+        });
         if (members.length == 0) {
             next({
                 code: 404,
