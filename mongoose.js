@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 
 module.exports = () => {
     mongoose.Promise = global.Promise
-    mongoose.connect('mongodb://127.0.0.1:27017/data')
+    mongoose.connect('mongodb://mongodb:27017/data')
         .then(() => {
             console.log('database connection is established.')
         }).catch(err => {

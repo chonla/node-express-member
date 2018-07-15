@@ -5,14 +5,19 @@ services:
     image: mongo
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
   mongo-seed:
     build: ./docker/mongo-seed
     links:
       - mongodb
-  # node:
-  #   build: ./docker/node
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - mongo
+  node:
+    image: node:8.10.0-alpine
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+      - mongo-seed
+    working_dir: /app
+    command: node server.js
