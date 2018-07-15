@@ -1,6 +1,23 @@
 # RESTful API with Node Express Example
 
-## Create User
+## ใช้ยังไง
+
+### ทำผ่าน docker compose
+
+ใช้ `docker-compose up --build -d`
+
+### ทำเองด้วยวิธี manual
+
+* ข้อมูลสำหรับ seed อยู่ที่ [./docker/mongo-seed](./docker/mongo-seed) เอาไป import เองเลย
+
+## API
+
+### Data ที่เตรียมไว้ให้ใน seed แล้ว
+
+* 2 Users (admin/password กับ john/password)
+* 7 Members
+
+### Create User
 
 **Method:** POST
 **Endpoint:** /users
@@ -12,7 +29,7 @@
 }
 ```
 
-## Authenticate User
+### Authenticate User
 
 **Method:** POST
 **Endpoint:** /auth/login
