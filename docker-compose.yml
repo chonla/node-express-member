@@ -18,6 +18,5 @@ services:
       - "3000:3000"
     links:
       - mongodb
-      - mongo-seed
     working_dir: /app
     command: node server.js
